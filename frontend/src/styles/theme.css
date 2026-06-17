@@ -1,0 +1,30 @@
+:root {
+  /* Colors */
+  --primary: #4f46e5;
+  --secondary: #06b6d4;
+  --success: #22c55e;
+  --warning: #f59e0b;
+
+  --background: #f8fafc;
+  --surface: #ffffff;
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+
+  /* Typography */
+  --font-small: 12px;
+  --font-body: 14px;
+  --font-title: 18px;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  /* Radius */
+  --radius: 12px;
+
+  /* Shadow */
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
