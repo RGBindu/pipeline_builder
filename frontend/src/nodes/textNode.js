@@ -1,15 +1,16 @@
 // textNode.js
 import { useState, useEffect, useRef } from "react";
-import { Handle, Position } from "reactflow";
+import { Handle, Position, useUpdateNodeInternals } from "reactflow";
 
 const MIN_WIDTH = 200;
 const MIN_HEIGHT = 80;
-const MAX_WIDTH = 400; 
+const MAX_WIDTH = 400;
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || "{{input}}");
   const [variables, setVariables] = useState([]);
   const textareaRef = useRef(null);
+  const updateNodeInternals = useUpdateNodeInternals();
 
   // Find {{ variableName }} tokens — only valid JS identifiers
   useEffect(() => {
@@ -19,8 +20,9 @@ export const TextNode = ({ id, data }) => {
     while ((match = regex.exec(currText)) !== null) {
       if (!found.includes(match[1])) found.push(match[1]);
     }
-    setVariables(found); // order = order they first appear in text
-  }, [currText]);
+    setVariables(found);
+    updateNodeInternals(id);
+  }, [currText, id, updateNodeInternals]);
 
   // Auto-resize height based on content
   useEffect(() => {
@@ -30,6 +32,11 @@ export const TextNode = ({ id, data }) => {
       textareaRef.current.style.height = `${newHeight}px`;
     }
   }, [currText]);
+
+  // Re-notify React Flow whenever the variables array changes (handles moved/added/removed)
+  useEffect(() => {
+    updateNodeInternals(id);
+  }, [variables, id, updateNodeInternals]);
 
   const headerHeight = 50;
   const rowGap = 22;
