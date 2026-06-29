@@ -36,7 +36,7 @@ export const SubmitButton = () => {
       );
     } catch (error) {
       alert(
-        "Network Error: Unable to connect to the backend. Please make sure the FastAPI server is running.",
+        "Network Error: Unable to connect to the backend. Please make sure the FastAPI server is running and try again.",
       );
       console.error(error);
     }

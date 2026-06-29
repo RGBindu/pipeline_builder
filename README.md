@@ -79,4 +79,4 @@ Improvements Made
 - Determined whether the pipeline is a valid Directed Acyclic Graph (DAG).
 - Displayed the node count, edge count, and DAG status in a user-friendly alert.
 - Handled network errors and invalid requests gracefully.
-- Configured CORS to allow communication between the React frontend and FastAPI backend during local development.
+- Configured CORS to enable communication between the React frontend and FastAPI backend during local development.
