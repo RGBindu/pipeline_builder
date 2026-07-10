@@ -8,7 +8,7 @@ import {
   FileUploadNode,
   WebhookTriggerNode,
 } from "./nodes/extraNodes";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import ReactFlow, { Controls, Background, MiniMap } from "reactflow";
 import { useStore } from "./store";
 import { shallow } from "zustand/shallow";
@@ -41,6 +41,11 @@ const selector = (state) => ({
   onNodesChange: state.onNodesChange,
   onEdgesChange: state.onEdgesChange,
   onConnect: state.onConnect,
+
+  undo: state.undo,
+  redo: state.redo,
+  past: state.past,
+  future: state.future,
 });
 
 export const PipelineUI = () => {
@@ -54,6 +59,8 @@ export const PipelineUI = () => {
     onNodesChange,
     onEdgesChange,
     onConnect,
+    undo,
+    redo,
   } = useStore(selector, shallow);
 
   const getInitNodeData = (nodeID, type) => {
@@ -100,6 +107,27 @@ export const PipelineUI = () => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   }, []);
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Undo (Ctrl + Z)
+      if (event.ctrlKey && event.key.toLowerCase() === "z") {
+        event.preventDefault();
+        undo();
+      }
+
+      // Redo (Ctrl + Y)
+      if (event.ctrlKey && event.key.toLowerCase() === "y") {
+        event.preventDefault();
+        redo();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [undo, redo]);
 
   return (
     <>
