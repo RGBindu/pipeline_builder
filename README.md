@@ -81,7 +81,7 @@ Improvements Made
 - Handled network errors and invalid requests gracefully.
 - Configured CORS to enable communication between the React frontend and FastAPI backend during local development.
 
-## VL-305 — Undo/Redo Support
+## VL-305 — Undo / Redo for Canvas Actions
 
 Implemented Undo and Redo functionality for the Pipeline Builder to improve the editing experience. Users can revert or restore node and edge operations without rebuilding the pipeline.
 
