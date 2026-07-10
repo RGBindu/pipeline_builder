@@ -80,3 +80,17 @@ Improvements Made
 - Displayed the node count, edge count, and DAG status in a user-friendly alert.
 - Handled network errors and invalid requests gracefully.
 - Configured CORS to enable communication between the React frontend and FastAPI backend during local development.
+
+## VL-305 — Undo/Redo Support
+
+Implemented Undo and Redo functionality for the Pipeline Builder to improve the editing experience. Users can revert or restore node and edge operations without rebuilding the pipeline.
+
+- Added Undo (Ctrl + Z) keyboard shortcut.
+- Added Redo (Ctrl + Y) keyboard shortcut.
+- Added Undo and Redo toolbar buttons.
+- Implemented history management using `past` and `future` stacks.
+- Stored nodes and edges together as a single snapshot for each history entry.
+- Automatically clears the redo history when a new action is performed after an undo.
+- Limited history to the latest 50 snapshots to optimize memory usage.
+- Undo and Redo buttons are automatically enabled or disabled based on available history.
+- History is maintained only for the current browser session (no persistence).
