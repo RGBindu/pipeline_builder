@@ -12,7 +12,7 @@ export const BaseNode = ({
     <div
       style={{
         minWidth: 240,
-        minHeight: 90,
+        minHeight: 120,
         border: "1px solid #e2e8f0",
         borderRadius: "16px",
         background: "#ffffff",
@@ -75,7 +75,7 @@ export const BaseNode = ({
           position={Position.Right}
           id={`${id}-${output.id}`}
           style={{
-            top: `${((i + 1) / (inputs.length + 1)) * 100}%`,
+            top: `${((i + 1) / (outputs.length + 1)) * 100}%`,
             width: 12,
             height: 12,
             background: "#4f46e5",

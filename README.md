@@ -94,3 +94,10 @@ Implemented Undo and Redo functionality for the Pipeline Builder to improve the 
 - Limited history to the latest 50 snapshots to optimize memory usage.
 - Undo and Redo buttons are automatically enabled or disabled based on available history.
 - History is maintained only for the current browser session (no persistence).
+
+## VL-306 — Node Search & Filter Sidebar
+- Added searchable sidebar on left side of canvas
+- Lists all 9 node types with color badge and description
+- Type to filter nodes by name or description
+- Drag nodes directly from sidebar onto canvas
+- Shows "No nodes found" when search has no results
