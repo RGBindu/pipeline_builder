@@ -163,4 +163,20 @@ export const useStore = create((set, get) => ({
       }),
     });
   },
+  // Replace entire pipeline (used for Import / Load)
+  setPipeline: (nodes, edges) => {
+    set({
+      nodes,
+      edges,
+      past: [],
+      future: [],
+    });
+  },
+
+  // Get current pipeline (used for Export / Save)
+  getPipeline: () => {
+    const { nodes, edges } = get();
+
+    return { nodes, edges };
+  },
 }));

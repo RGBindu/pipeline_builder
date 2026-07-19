@@ -3,8 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 from collections import deque
+from typing import Any, Dict
 
 app = FastAPI()
+
+saved_pipelines = {}
 
 # ---------------- CORS ---------------- #
 
@@ -29,6 +32,10 @@ class Pipeline(BaseModel):
     nodes: List[Node]
     edges: List[Edge]
 
+class PipelineSaveRequest(BaseModel):
+    name: str
+    nodes: List[Dict[str, Any]]
+    edges: List[Dict[str, Any]]
 # ---------------- Root ---------------- #
 
 @app.get("/")
@@ -76,3 +83,27 @@ def parse_pipeline(pipeline: Pipeline):
         "num_edges": len(pipeline.edges),
         "is_dag": is_dag(pipeline.nodes, pipeline.edges),
     }
+@app.post("/pipelines/save")
+def save_pipeline(request: PipelineSaveRequest):
+
+    saved_pipelines[request.name] = {
+        "nodes": request.nodes,
+        "edges": request.edges,
+    }
+
+    return {
+        "saved": True,
+        "name": request.name,
+    }
+
+
+@app.get("/pipelines/load/{name}")
+def load_pipeline(name: str):
+
+    if name not in saved_pipelines:
+        raise HTTPException(
+            status_code=404,
+            detail="Pipeline not found",
+        )
+
+    return saved_pipelines[name]

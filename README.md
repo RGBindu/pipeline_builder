@@ -96,8 +96,18 @@ Implemented Undo and Redo functionality for the Pipeline Builder to improve the 
 - History is maintained only for the current browser session (no persistence).
 
 ## VL-306 — Node Search & Filter Sidebar
+
 - Added searchable sidebar on left side of canvas
 - Lists all 9 node types with color badge and description
 - Type to filter nodes by name or description
 - Drag nodes directly from sidebar onto canvas
 - Shows "No nodes found" when search has no results
+
+## VL-307 — Pipeline Save & Load (JSON Export / Import)
+
+- Export the current pipeline as a JSON file
+- Import pipelines from JSON files
+- Save pipelines to the backend using a custom name
+- Load previously saved pipelines from the backend
+- Validate imported JSON files before loading
+- Display error messages for invalid JSON files and missing pipelines
